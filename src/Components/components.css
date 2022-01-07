@@ -1,3 +1,13 @@
+/*Sign In*/
+.sign-link {
+    color: #fff;
+}
+
+.sign-link:visited {
+    color: #fff;
+}
+
+/*Menu*/
 .fa-home {
     color: #00cc07;
 }

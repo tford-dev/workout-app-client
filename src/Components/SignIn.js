@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import Cookies from "js-cookie";
 import Form from './Form';
+import './components.css';
 
 const SignIn = (props) => {
     const [emailAddress, setEmailAddress] = useState("");
@@ -32,11 +33,13 @@ const SignIn = (props) => {
     const changeEmail = (event) => {
         const value = event.target.value;
         setEmailAddress(value);
+        console.log(emailAddress);
     }
 
     const changePassword = (event) => {
         const value = event.target.value;
-            setPassword(value);
+        setPassword(value);
+        console.log(password);
     }
 
     //Submit method takes required keys from state and sends the values to api 
@@ -50,9 +53,7 @@ const SignIn = (props) => {
                 .then((user) => {
                     //If user does not exist, this.state.errors is pushed an error message that will be rendered to user
                     if(user === null){
-                        this.setState(()=>{
-                            return {errors: [...errors, "Sign-In was unsuccessful."]}
-                        })
+                        setErrors([...errors, "Sign-In was unsuccessful."])
                     //If sign in is successful, user is redirected to previous page or private route
                     } else {
                         props.history.push(from);
@@ -87,7 +88,6 @@ const SignIn = (props) => {
                         submitButtonText="Sign In"
                         elements={() => (
                             <React.Fragment>
-                                
                                     <h2 className="form-header">Sign In <i className="fas fa-sign-in-alt"></i></h2>
                                     <FormRow>
                                         <FormLabel htmlFor="email">Email Address</FormLabel>
@@ -95,7 +95,7 @@ const SignIn = (props) => {
                                                 id="email" 
                                                 name="emailAddress" 
                                                 type="email" 
-                                                onChange={()=>changeEmail} 
+                                                onChange={changeEmail} 
                                                 placeholder={emailAddress}
                                                 required
                                             />
@@ -106,14 +106,14 @@ const SignIn = (props) => {
                                                 id="password" 
                                                 name="password"
                                                 type="password" 
-                                                onChange={()=>changePassword} 
+                                                onChange={changePassword} 
                                                 placeholder={password}
                                                 required
                                             />
                                         </FormRow>
-                                    <p className="form-label sign-prompt">
+                                    <SignInPrompt>
                                     Don't have a user account? <Link to="/signup" className="sign-link">Click here</Link> to sign up!
-                                    </p>  
+                                    </SignInPrompt> 
                                             
                             </React.Fragment>
                     )} />
@@ -127,7 +127,6 @@ const SignInContainer = styled.div`
     display: flex;
     width: 90%;
     color: #fff;
-    background-color: ;
     margin: auto;
     flex-direction: column;
     background-color: #424242;
@@ -153,8 +152,16 @@ const FormLabel = styled.label`
 `;
 
 const Input = styled.input`
-    width: 70%;
+    width: 65%;
+    background: #424242;
     border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    color: #fff;
+`;
+
+const SignInPrompt = styled.p`
+    font-size: 13px;
 `;
 
 export default SignIn

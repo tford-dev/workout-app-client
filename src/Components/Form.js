@@ -1,5 +1,6 @@
 /* eslint-disable */ 
-import React from 'react'
+import React from 'react';
+import styled from 'styled-components';
 
 export default (props) => {
 	const {
@@ -26,10 +27,10 @@ export default (props) => {
 				<div className="container sign-form">
 					<ErrorsDisplay errors={errors} />
 					{elements()}
-						<div className="form-button-container">
-							<input className="form-submit" type="submit" value={submitButtonText} />
-							<button className="form-cancel" onClick={handleCancel}>Cancel</button>
-						</div>
+						<ButtonContainer>
+							<FormSubmit className="form-submit" type="submit" value={submitButtonText} />
+							<FormCancel className="form-cancel" onClick={handleCancel}>Cancel</FormCancel>
+						</ButtonContainer>
 				</div>
 			</form>
 		</div>
@@ -55,3 +56,23 @@ function ErrorsDisplay({ errors }) {
 }
   return errorsDisplay;
 }
+
+const ButtonContainer = styled.div``;
+
+const FormSubmit = styled.input`
+	border: none;
+	height: 25px;
+	color: #fff;
+	background-color: #000;
+	border-radius: 5px;
+	margin-right: 5px;
+`;
+
+const FormCancel = styled.button`
+	border: none;
+	height: 25px;
+	color: #fff;
+	background-color: #000;
+	border-radius: 5px;
+	margin-left: 5px;
+`;
