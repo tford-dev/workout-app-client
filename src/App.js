@@ -14,6 +14,10 @@ import Workout from './Components/Workout';
 import Exercises from './Components/Exercises';
 import Exercise from './Components/Exercise';
 import Help from './Components/Help';
+import NavBar from './Components/NavBar';
+import AppError from './Components/AppError';
+import SignOut from './Components/SignOut';
+import PrivateRoute from './Components/PrivateRoute';
 import { useStateValue } from './ContextApi/StateProvider';
 import styled from 'styled-components';
 // <Route path="/" component={} />
@@ -22,14 +26,17 @@ function App() {
 	return (
         <Router>
             <AppContainer>
-                <Route path="/sign-in" component={Signin} />
-                <Route path="/sign-up" component={Signup} />
-                <Route path="/home" component={Home} />
-                <Route path="/workouts" component={Workouts} />
-                <Route path="/workouts/:id" component={Workout} />
-                <Route path="/workouts/:workoutId/exercises" component={Exercises} />
-                <Route path="/workouts/:workoutId/exercises/:id" component={Exercise} />
-                <Route path="/help" component={Help} />
+                    <NavBar />
+                    <PrivateRoute path="/home" component={Home} />
+                    <Route path="/sign-in" component={Signin} />
+                    <Route path="/sign-up" component={Signup} />
+                    <Route path="/workouts" component={Workouts} />
+                    <Route path="/workouts/:id" component={Workout} />
+                    <Route path="/workouts/:workoutId/exercises" component={Exercises} />
+                    <Route path="/workouts/:workoutId/exercises/:id" component={Exercise} />
+                    <Route path="/help" component={Help} />
+                    <Route path="/sign-out" component={SignOut} />
+                    <Route path="/error" component={AppError} />
             </AppContainer>
         </Router>
 	);

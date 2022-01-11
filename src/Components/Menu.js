@@ -1,27 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink, Link } from 'react-router-dom';
 import './components.css';
 
 const Menu = () => {
     return (
         <MenuContainer>
             <MenuItem>
-                <MenuText>
-                    <i className="fas fa-home"></i>
-                    <p>Home</p>
-                </MenuText>
+                <Link className="menu__link" to="/home">
+                    <MenuText>
+                        <i className="fas fa-home"></i>
+                        <p>Home</p>
+                    </MenuText>
+                </Link>
             </MenuItem>
             <MenuItem>
-                <MenuText>
-                    <i className="far fa-question-circle menu-question"></i>
-                    <p>Help</p>
-                </MenuText>
+                <Link className="menu__link" to="/help">
+                    <MenuText>
+                        <i className="far fa-question-circle menu-question"></i>
+                        <p>Help</p>
+                    </MenuText>
+                </Link>
             </MenuItem>
             <MenuItem>
-                <MenuText>
-                    <i className="fas fa-sign-out-alt"></i>
-                    <p>Sign Out</p>
-                </MenuText>
+                <Link className="menu__link" to="/sign-out">
+                    <MenuText>
+                        <i className="fas fa-sign-out-alt"></i>
+                        <p>Sign Out</p>
+                    </MenuText>
+                </Link>
             </MenuItem>
         </MenuContainer>
     )
@@ -39,6 +46,7 @@ const MenuItem = styled.div`
     border-bottom: 1px solid #787878;
     &:hover {
         background-color: #787878;
+        cursor: pointer;
     }
 `
 
@@ -53,6 +61,10 @@ const MenuText = styled.div`
         margin-top: -6px;
         margin-right: 10px;
     }
+`
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
 `
 
 export default Menu

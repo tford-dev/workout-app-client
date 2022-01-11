@@ -1,9 +1,9 @@
 /*Sign In*/
-.sign-link {
+.sign__link {
     color: #fff;
 }
 
-.sign-link:visited {
+.sign__link:visited {
     color: #fff;
 }
 
@@ -18,4 +18,13 @@
 
 .fa-sign-out-alt {
     color: #ffb300;
+}
+
+.menu__link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.link:visited {
+    color: white;
 }

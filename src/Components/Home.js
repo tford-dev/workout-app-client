@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styled from 'styled-components';
-import NavBar from './NavBar';
+import { useStateValue } from '../ContextApi/StateProvider';
 
 const Home = () => {
-    return (
+    const [initialState, dispatch] = useStateValue();
+    const authUser = JSON.parse(initialState.authenticatedUser);
+    initialState.WorkoutRequests.getWorkouts(authUser.emailAddress, authUser.password);
+    return ( 
         <HomeContainer>
-            <NavBar />
+            <h1>Hello world</h1>
         </HomeContainer>
     )
 }

@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import "../index.css";
+import Menu from "./Menu";
 import { useStateValue } from '../ContextApi/StateProvider';
 
 const NavBar = () => {
-    const [{ menuOpen }, dispatch] = useStateValue();
+    const [initialState, dispatch] = useStateValue();
+    const authUser = initialState.authenticatedUser;
+    console.log(initialState);
     const setMenuOpen = () =>{
-        if(menuOpen){
+        if(initialState.menuOpen){
             dispatch({
                 type: 'SET_MENU_OPEN',
                 menuOpen: false
@@ -22,10 +25,14 @@ const NavBar = () => {
         <Nav>
             <NavContainer>
                 {
-                    menuOpen ? (
-                        <i className="fas fa-times" onClick={setMenuOpen}></i>
+                    authUser ? (
+                        initialState.menuOpen ? (
+                            <i className="fas fa-times" onClick={setMenuOpen}></i>
+                        ) : (
+                            <i className="fas fa-bars" onClick={setMenuOpen}></i>
+                        )
                     ) : (
-                        <i className="fas fa-bars" onClick={setMenuOpen}></i>
+                        <i className="fas fa-bars" onClick={setMenuOpen} style={{visibility: 'hidden'}}></i>
                     )
                 }
                 <NavLogoHeader>
@@ -52,6 +59,13 @@ const NavBar = () => {
                 </NavLogoHeader>
                 <i className="far fa-question-circle nav__help"></i>
             </NavContainer>
+            {
+                initialState.menuOpen ? (
+                    <Menu />
+                ) : (
+                    null
+                )
+            }
         </Nav>
     )
 }

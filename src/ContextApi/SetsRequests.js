@@ -1,4 +1,5 @@
 import {api} from './reducer';
+import { initialState } from './reducer';
 
 //GET request to retrieve Sets
 const getSets = async(workoutId, id, emailAddress, password) => {

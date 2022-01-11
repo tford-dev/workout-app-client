@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from "js-cookie";
 import { ExerciseRequests } from './ExerciseRequests';
 import { WorkoutRequests } from './WorkoutRequests';
 import { SetRequests } from './SetsRequests';
@@ -28,9 +29,25 @@ export const api = (path, method='GET', body=null, requiresAuth=false, credentia
     return fetch(url, options);
 }
 
+const signIn = async (emailAddress, password) => {
+    const user = await initialState.UserRequests.getUser(emailAddress, password);
+    if(user !== null){
+        user.password = password;
+        initialState.authenticatedUser = user;
+    //Sets authenticated user in cookies for 7 daYS
+    Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 7});
+    }
+    return user;
+} 
+
+const signOut = () => {
+    Cookies.remove("authenticatedUser");
+    initialState.authenticatedUser = null;
+}
+
 export const initialState = {
     menuOpen: false,
-    authenticatedUser: null,
+    authenticatedUser: Cookies.get("authenticatedUser") || null,
     workouts: null,
     exercises: null,
     sets: null,
@@ -38,6 +55,8 @@ export const initialState = {
     WorkoutRequests: WorkoutRequests,
     SetRequests: SetRequests,
     UserRequests: UserRequests,
+    signIn: signIn,
+    signOut: signOut
 }
 
 export const reducer = (state, action) => {
@@ -46,7 +65,7 @@ export const reducer = (state, action) => {
         case 'SET_USER': 
             return {
                 ...state,
-                authenticatedUser: action.authenticatedUser
+                authenticatedUser: action.authenticatedUser,
             }
         case 'SET_MENU_OPEN':
             return {
@@ -58,7 +77,7 @@ export const reducer = (state, action) => {
                 ...state,
                 workouts: action.workouts
             }
-        
+
         default:
             return state;
     }

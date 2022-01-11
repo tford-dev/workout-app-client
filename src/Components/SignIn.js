@@ -14,65 +14,61 @@ const SignIn = (props) => {
     const [initialState, dispatch] = useStateValue();
     const authUser = initialState.authenticatedUser;
 
-    const signIn = async (emailAddress, password) => {
-        const user = await initialState.UserRequests.getUser(emailAddress, password);
-        if(user !== null){
-            user.password = password;
+    // const signIn = async (emailAddress, password) => {
+    //     const user = await initialState.UserRequests.getUser(emailAddress, password);
+    //     if(user !== null){
+    //         user.password = password;
 
-            dispatch({
-                type: "SET_USER",
-                authenticatedUser: user
-            })
-        //Sets authenticated user in cookies for 24 hours
-        Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 7});
-        }
-        return user;
-    } 
+    //         dispatch({
+    //             type: "SET_USER",
+    //             authenticatedUser: user
+    //         })
+    //         //Sets authenticated user in cookies for 7 days
+    //         Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 7});
+    //     }
+    //     return user;
+    // } 
 
     //simple method to modify state value based on what is typed in input/textarea elements
-    const changeEmail = (event) => {
+    const change = (event, setState) => {
         const value = event.target.value;
-        setEmailAddress(value);
-        console.log(emailAddress);
-    }
-
-    const changePassword = (event) => {
-        const value = event.target.value;
-        setPassword(value);
-        console.log(password);
+        setState(value);
     }
 
     //Submit method takes required keys from state and sends the values to api 
     const submit = () => {
         // {from} returns user to privateRoute that user tried to access after being authenticated or previous page before requesting to sign in
-        const {from} = props.location.state || {from: {pathname: props.history.goBack()}};
-        const {emailAddress, password, errors} = this.state;
-
-        
-            signIn(emailAddress, password)
+        //const {from} = props.location.state || {from: {pathname: props.history.goBack()}};
+            initialState.signIn(emailAddress, password)
                 .then((user) => {
-                    //If user does not exist, this.state.errors is pushed an error message that will be rendered to user
+                    //If user does not exist, errors is pushed an error message that will be rendered to user
                     if(user === null){
+                        console.log(errors);
                         setErrors([...errors, "Sign-In was unsuccessful."])
                     //If sign in is successful, user is redirected to previous page or private route
                     } else {
-                        props.history.push(from);
+                        //props.history.push(from);
                         if(window.location.pathname === "/error"){
-                            props.history.push("/");
+                            //props.history.push("/home");
                         }
+                        dispatch({
+                            type: "SET_USER",
+                            authenticatedUser: user,
+                        })
+
                         console.log(`${emailAddress} is now signed in!`);
                     }
                 })
-                .catch(err => {
-                    console.log(err);
-                    props.history.push("/error");
+                .catch( err => {
+                    console.log(err.message);
+                    setErrors([...errors, err.message])
+                    //props.history.push("/error");
                 })
     }
 
     const cancel = () => {
-        props.history.push('/signup');
+        props.history.push('/sign-up');
     }
-
     if(authUser){
             return(
                 <Redirect to="/home" />
@@ -95,7 +91,7 @@ const SignIn = (props) => {
                                                 id="email" 
                                                 name="emailAddress" 
                                                 type="email" 
-                                                onChange={changeEmail} 
+                                                onChange={(e)=> change(e, setEmailAddress)} 
                                                 placeholder={emailAddress}
                                                 required
                                             />
@@ -106,13 +102,13 @@ const SignIn = (props) => {
                                                 id="password" 
                                                 name="password"
                                                 type="password" 
-                                                onChange={changePassword} 
+                                                onChange={(e)=> change(e, setPassword)} 
                                                 placeholder={password}
                                                 required
                                             />
                                         </FormRow>
                                     <SignInPrompt>
-                                    Don't have a user account? <Link to="/signup" className="sign-link">Click here</Link> to sign up!
+                                    Don't have a user account? <Link to="/sign-up" className="sign__link">Click here</Link> to sign up!
                                     </SignInPrompt> 
                                             
                             </React.Fragment>

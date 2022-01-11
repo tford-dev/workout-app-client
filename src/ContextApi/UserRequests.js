@@ -5,9 +5,13 @@ export const getUser = async(emailAddress, password) => {
     const response = await api(`/users`, 'GET', null, true, {emailAddress, password});
     if (response.status === 401) {
         return response.json().then(data => {
-            return data.message;
+            console.log(response);
+            console.log(data.message)
+            //return data.message;
+            throw new Error("Sign-in was unsuccessful, please enter valid data.");
         })
     } else if (response.status === 200) {
+        console.log(response);
         return response.json().then(data => data)
     } else {
         throw new Error();

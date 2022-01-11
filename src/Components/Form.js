@@ -28,8 +28,8 @@ export default (props) => {
 					<ErrorsDisplay errors={errors} />
 					{elements()}
 						<ButtonContainer>
-							<FormSubmit className="form-submit" type="submit" value={submitButtonText} />
-							<FormCancel className="form-cancel" onClick={handleCancel}>Cancel</FormCancel>
+							<FormSubmit type="submit" value={submitButtonText} />
+							<FormCancel onClick={handleCancel}>Cancel</FormCancel>
 						</ButtonContainer>
 				</div>
 			</form>
@@ -66,6 +66,7 @@ const FormSubmit = styled.input`
 	background-color: #000;
 	border-radius: 5px;
 	margin-right: 5px;
+	cursor: pointer;
 `;
 
 const FormCancel = styled.button`
@@ -75,4 +76,5 @@ const FormCancel = styled.button`
 	background-color: #000;
 	border-radius: 5px;
 	margin-left: 5px;
+	cursor: pointer;
 `;
