@@ -27,15 +27,15 @@ const NavBar = () => {
                 {
                     authUser ? (
                         initialState.menuOpen ? (
-                            <i className="fas fa-times" onClick={setMenuOpen}></i>
+                            <i className="fas fa-times" onClick={setMenuOpen} tabIndex={1}></i>
                         ) : (
-                            <i className="fas fa-bars" onClick={setMenuOpen}></i>
+                            <i className="fas fa-bars" onClick={setMenuOpen} tabIndex={1}></i>
                         )
                     ) : (
                         <i className="fas fa-bars" onClick={setMenuOpen} style={{visibility: 'hidden'}}></i>
                     )
                 }
-                <NavLogoHeader>
+                <NavLogoHeader tabIndex={1}>
                     <NavLogo version="1.0" xmlns="http://www.w3.org/2000/svg" width="139.000000pt" height="140.000000pt"
                         viewBox="0 0 139.000000 140.000000" preserveAspectRatio="xMidYMid meet">
                     
@@ -57,7 +57,7 @@ const NavBar = () => {
                     </NavLogo>
                     <NavHeader>Workout</NavHeader>
                 </NavLogoHeader>
-                <i className="far fa-question-circle nav__help"></i>
+                <i className="far fa-question-circle nav__help" tabIndex={1}></i>
             </NavContainer>
             {
                 initialState.menuOpen ? (
@@ -74,6 +74,7 @@ const Nav = styled.div`
     height: 56px;
     width: 100%;
     color: #fff;
+    background-color: #000;
 `
 
 const NavContainer = styled.div`

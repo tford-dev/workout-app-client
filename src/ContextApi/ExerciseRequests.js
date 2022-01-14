@@ -2,7 +2,7 @@ import {api} from './reducer';
 
 //GET request to retrieve all exercises by a user
 const getExercises = async(id, emailAddress, password) => {
-    const response = await api(`/workouts${id}/exercises`, 'GET', null, true, {emailAddress, password});
+    const response = await api(`/workouts/${id}/exercises`, 'GET', null, true, {emailAddress, password});
     if(response.status === 200) {
         return response.json().then(data => data);
     } else if (response.status === 400) {
@@ -30,8 +30,8 @@ const getExercise = async(workoutId, id, emailAddress, password) => {
 
 //POST request to create an exercise
 const createExercise = async(obj, emailAddress, password) =>{
-    const response = await api(`/workout/${obj.workoutId}/exercises`, 'POST', obj, true, {emailAddress, password});
-    if(obj.title.length > 0 && obj.description.length > 0){
+    const response = await api(`/workouts/${obj.workoutId}/exercises`, 'POST', obj, true, {emailAddress, password});
+    if(obj.title.length > 0){
         if (response.status === 201) {
             return "success";
         } else if (response.status === 401 || 403) {

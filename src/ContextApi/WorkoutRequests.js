@@ -4,14 +4,12 @@ import {api} from './reducer';
 const getWorkouts = async(emailAddress, password) => {
     const response = await api('/workouts', 'GET', null, true, {emailAddress, password});
     if(response.status === 200) {
-        console.log(emailAddress, password)
         return response.json().then(data => data);
     } else if (response.status === 400) {
         return response.json().then(data => {
             return data.errors;
         });
     } else {
-        console.log(emailAddress, password)
         throw new Error();
     }
 }

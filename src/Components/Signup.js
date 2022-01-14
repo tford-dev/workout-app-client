@@ -44,20 +44,22 @@ const SignUp = (props) => {
 
         //createUser method takes credentials from context api and course variable to execute request 
         initialState.UserRequests.createUser(user)
-            .then(errors => {
-                if(errors.length){
-                    setErrors([errors])
+            .then(err => {
+                if(err.length){
+                    console.log(err)
+                    setErrors([...errors, err])
+                    console.log(errors)
                 } else {
                     initialState.signIn(emailAddress, password)
                         .then(() => {
                             props.history.push("/home");
                         })
                     console.log(`${emailAddress} is successfully signed up and authorized!`);
+                    window.location.reload();
                 }
             })
             .catch(err => {
-                console.log(err);
-                this.props.history.push("/error");
+                console.log(err.message);
             })
     }
 
@@ -76,29 +78,33 @@ const SignUp = (props) => {
                 <FormContainer>
                     <Form 
                         cancel={cancel}
-                        errors={errors}
                         submit={submit}
                         submitButtonText="Sign Up"
                         elements={() => (
                             <React.Fragment>
                                     <h2 className="form-header">Sign Up <i className="fas fa-user-plus"></i></h2>
+                                    {errors.map((error, i) => <ErrorMessage key={i}>{error}</ErrorMessage>)}
                                     <FormRow>
-                                        <FormLabel htmlFor="firstName" className="form-label">First Name</FormLabel>
+                                        <FormLabel htmlFor="firstName">First Name</FormLabel>
                                         <Input
                                             id="firstName"
                                             name="firstName"
                                             type="text"
                                             onChange={(e)=> change(e, setFirstName)} 
-                                            placeholder={firstName}/>
+                                            placeholder={firstName}
+                                            required
+                                            />
                                     </FormRow>
                                     <FormRow>
-                                        <FormLabel htmlFor="lastName" className="form-label">Last Name</FormLabel>
+                                        <FormLabel htmlFor="lastName">Last Name</FormLabel>
                                         <Input
                                             id="lastName" 
                                             name="lastName" 
                                             type="text" 
                                             onChange={(e) => change(e, setLastName)} 
-                                            placeholder={lastName}/>
+                                            placeholder={lastName}
+                                            required
+                                            />
                                     </FormRow>
                                     <FormRow>
                                         <FormLabel htmlFor="email">Email Address</FormLabel>
@@ -174,5 +180,12 @@ const Input = styled.input`
 const SignInPrompt = styled.p`
     font-size: 13px;
 `;
+
+const ErrorMessage = styled.p`
+    color: red;
+    font-size: 13px;
+    margin-top: -7.5px;
+    margin-bottom: -7.5px;
+`
 
 export default SignUp

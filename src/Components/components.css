@@ -1,3 +1,12 @@
+/*Global*/
+.link {
+    text-decoration: none;
+}
+
+.link:visited {
+    color: white;
+}
+
 /*Sign In*/
 .sign__link {
     color: #fff;
@@ -27,4 +36,18 @@
 
 .link:visited {
     color: white;
+}
+
+/*Workout Component*/
+.fa-dumbbell, .fa-calendar-alt, .fa-plus-square {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.fa-dumbbell {
+    color: #0088cc;
+}
+
+.fa-calendar-alt {
+    color: #00cc07;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import Cookies from "js-cookie";
 import { ExerciseRequests } from './ExerciseRequests';
 import { WorkoutRequests } from './WorkoutRequests';
-import { SetRequests } from './SetsRequests';
+import { SetsRequests } from './SetsRequests';
 import { UserRequests } from './UserRequests';
 //Cookies.getJSON("authenticatedUser") ||
 
@@ -51,9 +51,10 @@ export const initialState = {
     workouts: null,
     exercises: null,
     sets: null,
+    exerciseFormOpen: false,
     ExerciseRequests: ExerciseRequests,
     WorkoutRequests: WorkoutRequests,
-    SetRequests: SetRequests,
+    SetsRequests: SetsRequests,
     UserRequests: UserRequests,
     signIn: signIn,
     signOut: signOut
@@ -72,12 +73,16 @@ export const reducer = (state, action) => {
                 ...state, 
                 menuOpen: action.menuOpen
             };
+        case 'SET_EXERCISE_FORM_OPEN':
+            return {
+                ...state,
+                exerciseFormOpen: action.exerciseFormOpen
+            }
         case 'SET_WORKOUTS': 
             return {
                 ...state,
                 workouts: action.workouts
             }
-
         default:
             return state;
     }

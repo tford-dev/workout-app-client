@@ -9,17 +9,19 @@ import {
 import Signin from './Components/SignIn';
 import Signup from './Components/Signup';
 import Home from './Components/Home';
-import Workouts from './Components/Workouts';
+import WorkoutPage from './Components/WorkoutPage';
 import Workout from './Components/Workout';
-import Exercises from './Components/Exercises';
+import ExercisePage from './Components/ExercisePage';
 import Exercise from './Components/Exercise';
 import Help from './Components/Help';
 import NavBar from './Components/NavBar';
 import AppError from './Components/AppError';
 import SignOut from './Components/SignOut';
+import NewWorkout from './Components/NewWorkout';
 import PrivateRoute from './Components/PrivateRoute';
 import { useStateValue } from './ContextApi/StateProvider';
 import styled from 'styled-components';
+import WorkoutEdit from './Components/WorkoutEdit';
 // <Route path="/" component={} />
 
 function App() {
@@ -27,16 +29,18 @@ function App() {
         <Router>
             <AppContainer>
                     <NavBar />
-                    <PrivateRoute path="/home" component={Home} />
-                    <Route path="/sign-in" component={Signin} />
-                    <Route path="/sign-up" component={Signup} />
-                    <Route path="/workouts" component={Workouts} />
-                    <Route path="/workouts/:id" component={Workout} />
-                    <Route path="/workouts/:workoutId/exercises" component={Exercises} />
-                    <Route path="/workouts/:workoutId/exercises/:id" component={Exercise} />
-                    <Route path="/help" component={Help} />
-                    <Route path="/sign-out" component={SignOut} />
-                    <Route path="/error" component={AppError} />
+                    <Switch>
+                        <PrivateRoute path="/home" component={Home} />
+                        <Route path="/sign-in" component={Signin} />
+                        <Route path="/sign-up" component={Signup} />
+                        <Route path="/new-workout" component={NewWorkout} />
+                        <Route path="/workouts/:workoutId/exercises/:id" component={ExercisePage} />
+                        <Route path="/workouts/:id/edit" component={WorkoutEdit} />
+                        <Route path="/workouts/:id" component={WorkoutPage} />
+                        <Route path="/help" component={Help} />
+                        <Route path="/sign-out" component={SignOut} />
+                        <Route path="/error" component={AppError} />
+                    </Switch>
             </AppContainer>
         </Router>
 	);

@@ -3,7 +3,7 @@ import { initialState } from './reducer';
 
 //GET request to retrieve Sets
 const getSets = async(workoutId, id, emailAddress, password) => {
-    const response = await api(`/workouts${workoutId}/exercises/${id}/sets`, 'GET', null, true, {emailAddress, password});
+    const response = await api(`/workouts/${workoutId}/exercises/${id}/sets`, 'GET', null, true, {emailAddress, password});
     if(response.status === 200) {
         return response.json().then(data => data);
     } else if (response.status === 400) {
@@ -30,9 +30,9 @@ const getSet = async(workoutId, exerciseId, id, emailAddress, password) => {
 }
 
 //POST request to create a set
-const createSet = async(obj, emailAddress, password) =>{
-    const response = await api(`/workout/${obj.workoutId}/exercises${obj.exerciseId}/sets`, 'POST', obj, true, {emailAddress, password});
-    if(obj.title.length > 0 && obj.description.length > 0){
+const createSet = async(obj, workoutId, exerciseId, emailAddress, password) =>{
+    const response = await api(`/workouts/${workoutId}/exercises/${exerciseId}/sets`, 'POST', obj, true, {emailAddress, password});
+    if(obj.repetitions > 0){
         if (response.status === 201) {
             return "success";
         } else if (response.status === 401 || 403) {
@@ -48,9 +48,9 @@ const createSet = async(obj, emailAddress, password) =>{
 }
 
 //PUT request to edit/update a set
-const updateSet = async(obj, emailAddress, password) =>{
-    const response = await api(`/workouts/${obj.workoutId}/exercises/${obj.exerciseId}/sets/${obj.id}`, 'PUT', obj, true, {emailAddress, password});
-    if(obj.title.length > 0 && obj.description.length > 0){
+const updateSet = async(workoutId, exerciseId, id, obj, emailAddress, password) =>{
+    const response = await api(`/workouts/${workoutId}/exercises/${exerciseId}/sets/${id}`, 'PUT', obj, true, {emailAddress, password});
+    if(obj.repetitions > 0){
         if (response.status === 204) {
             return "success";
         } else if (response.status === 403 || 401) {
@@ -78,7 +78,7 @@ const deleteSet = async(workoutId, exerciseId, id, emailAddress, password) => {
     }
 }
 
-export const SetRequests = {
+export const SetsRequests = {
     getSets,
     getSet,
     createSet,

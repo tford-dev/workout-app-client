@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import { NavLink, Link } from 'react-router-dom';
 import './components.css';
 
+const signOutFunc = () => {
+    window.location.reload();
+}
+
 const Menu = () => {
     return (
         <MenuContainer>
@@ -22,7 +26,7 @@ const Menu = () => {
                     </MenuText>
                 </Link>
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={signOutFunc}>
                 <Link className="menu__link" to="/sign-out">
                     <MenuText>
                         <i className="fas fa-sign-out-alt"></i>
@@ -61,10 +65,6 @@ const MenuText = styled.div`
         margin-top: -6px;
         margin-right: 10px;
     }
-`
-
-const StyledLink = styled(Link)`
-    text-decoration: none;
 `
 
 export default Menu

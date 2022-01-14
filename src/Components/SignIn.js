@@ -43,32 +43,31 @@ const SignIn = (props) => {
                 .then((user) => {
                     //If user does not exist, errors is pushed an error message that will be rendered to user
                     if(user === null){
-                        console.log(errors);
                         setErrors([...errors, "Sign-In was unsuccessful."])
                     //If sign in is successful, user is redirected to previous page or private route
                     } else {
+                        window.location.reload();
                         //props.history.push(from);
                         if(window.location.pathname === "/error"){
-                            //props.history.push("/home");
+                            props.history.push("/home");
                         }
                         dispatch({
                             type: "SET_USER",
                             authenticatedUser: user,
                         })
-
                         console.log(`${emailAddress} is now signed in!`);
                     }
                 })
                 .catch( err => {
                     console.log(err.message);
-                    setErrors([...errors, err.message])
-                    //props.history.push("/error");
+                    setErrors([...errors, err.message]);
                 })
     }
 
     const cancel = () => {
         props.history.push('/sign-up');
     }
+
     if(authUser){
             return(
                 <Redirect to="/home" />
@@ -79,12 +78,12 @@ const SignIn = (props) => {
                 <FormContainer>
                     <Form 
                         cancel={cancel}
-                        errors={errors}
                         submit={submit}
                         submitButtonText="Sign In"
                         elements={() => (
                             <React.Fragment>
                                     <h2 className="form-header">Sign In <i className="fas fa-sign-in-alt"></i></h2>
+                                    {errors.map((error, i) => <ErrorMessage key={i}>{error}</ErrorMessage>)}
                                     <FormRow>
                                         <FormLabel htmlFor="email">Email Address</FormLabel>
                                             <Input 
@@ -159,5 +158,12 @@ const Input = styled.input`
 const SignInPrompt = styled.p`
     font-size: 13px;
 `;
+
+const ErrorMessage = styled.p`
+    color: red;
+    font-size: 13px;
+    margin-top: -7.5px;
+    margin-bottom: -7.5px;
+`
 
 export default SignIn
