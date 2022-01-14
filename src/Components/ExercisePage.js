@@ -54,6 +54,33 @@ const ExercisePage = (props) => {
         })
     }
 
+    const deleteThisExercise = () => {
+        let workoutId = props.match.params.workoutId;
+        let id = props.match.params.id;
+        console.log(workoutId)
+        console.log(id)
+        if(window.confirm("Are sure you want to delete this exercise? Once deleted, it can not be retrieved.")){
+            initialState.ExerciseRequests.deleteExercise(workoutId, id, authUser.emailAddress, authUser.password)
+                .then((response) =>{
+                    if(response === 'success'){
+                        alert("Exercise deleted.")
+                        props.history.push(`/workouts/${workoutId}`);
+                    } else {
+                        props.history.push('/error');
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    props.history.push('/error');
+                })
+        }
+    }
+
+    const toEditPage = () => {
+        props.history.push(
+            `/workouts/${props.match.params.workoutId}/exercises/${props.match.params.id}/edit`
+        )
+    }
+
     const change = (event, setState) => {
         const value = event.target.value;
         setState(value);
@@ -99,11 +126,19 @@ const ExercisePage = (props) => {
                 />
     })
 
-    console.log(sets)
+    console.log(props.match)
     return (
         <ExercisePageContainer>
             <ExerciseContentContainer>
                 <ExerciseHeader>Exercise: {exercise.title}</ExerciseHeader>
+                <ExerciseButtonContainer>
+                    <EditButton onClick={toEditPage}>
+                        <p>Edit Exercise</p>
+                    </EditButton>
+                    <DeleteButton onClick={deleteThisExercise}>
+                        <p>Delete Exercise</p>
+                    </DeleteButton>
+                </ExerciseButtonContainer>
                 <ExerciseForm>
                     <Form
                         cancel={cancel}
@@ -148,6 +183,45 @@ const ExerciseContentContainer = styled.div`
 
 const ExerciseHeader = styled.h2`
     border-bottom: 1px solid #787878;
+`;
+
+const ExerciseButtonContainer = styled.div`
+    border-bottom: 1px solid #787878;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-evenly;
+`;
+
+const EditButton = styled.div`
+    margin-top: -15px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #00661b;
+    & > p {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    &:hover {
+        color: #00661b;
+        background-color: #fff;
+    }
+`;
+
+const DeleteButton = styled.div`
+    margin-top: -15px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #c20000;
+    & > p {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    &:hover {
+        color: #c20000;
+        background-color: #fff;
+    }
 `;
 
 const ExerciseForm = styled.div`

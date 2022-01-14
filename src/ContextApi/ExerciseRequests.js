@@ -49,8 +49,9 @@ const createExercise = async(obj, emailAddress, password) =>{
 //PUT request to edit/update an exercise
 const updateExercise = async(obj, emailAddress, password) =>{
     const response = await api(`/workouts/${obj.workoutId}/exercises/${obj.id}`, 'PUT', obj, true, {emailAddress, password});
-    if(obj.title.length > 0 && obj.description.length > 0){
+    if(obj.title.length > 0){
         if (response.status === 204) {
+            console.log(obj);
             return "success";
         } else if (response.status === 403 || 401) {
             return "forbidden";

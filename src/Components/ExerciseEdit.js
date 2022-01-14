@@ -3,27 +3,42 @@ import styled from 'styled-components';
 import Form from './Form';
 import { useStateValue } from '../ContextApi/StateProvider';
 
-const NewExercise = (props) => {
+const ExerciseEdit = (props) => {
     const [errors, setErrors] = useState([]);
     const [title, setTitle] = useState("");
+    const [exercise, setExercise] = useState({});
     const [initialState, dispatch] = useStateValue();
     const authUser = JSON.parse(initialState.authenticatedUser);
 
+    useEffect(()=>{
+        initialState.ExerciseRequests.getExercise(
+            props.match.params.workoutId,
+            props.match.params.id,
+            authUser.emailAddress, 
+            authUser.password
+        ).then(
+            response => setExercise(response)
+        ).catch(err => {
+            console.log('Error' + err);
+        })
+    }, [])
+
+    const change = (event, setState) => {
+        const value = event.target.value;
+        setState(value);
+    }
+
     const submit = () => {
-        let workoutId = parseInt(props.workoutId);
-        const exercise = {title, workoutId};
-        console.log(exercise);
-        initialState.ExerciseRequests.createExercise(exercise, authUser.emailAddress, authUser.password)
+        let workoutId = props.match.params.workoutId;
+        let id = exercise.id;
+        const obj = {id, title, workoutId};
+        initialState.ExerciseRequests.updateExercise(obj, authUser.emailAddress, authUser.password)
             .then((response)=> {
                 if (response === "success"){
-                    console.log(`${authUser.emailAddress} has successfully created exercise ${exercise}`)
-                    dispatch({
-                        type: 'SET_EXERCISE_FORM_OPEN',
-                        exerciseFormOpen: false
-                    })
-                    props.updateFunction();
+                    console.log(`Exercise successfully updated`)
+                    props.history.push(`/workouts/${props.match.params.workoutId}/exercises/${props.match.params.id}`);
                 } else if (response === "forbidden") {
-                    setErrors([...errors, "You must be logged in to create an exercise."]);
+                    setErrors([...errors, "You must be logged in to edit an exercise."]);
                 } else {
                     setErrors([...errors, response])
                     console.log(errors);
@@ -33,16 +48,8 @@ const NewExercise = (props) => {
             })
     }
 
-    const change = (event, setState) => {
-        const value = event.target.value;
-        setState(value);
-    }
-
     const cancel = () => {
-        dispatch({
-            type: 'SET_EXERCISE_FORM_OPEN',
-            exerciseFormOpen: false
-        })
+        props.history.push(`/workouts/${props.match.params.workoutId}/exercises/${props.match.params.id}`);
     }
 
     return (
@@ -50,10 +57,10 @@ const NewExercise = (props) => {
             <Form 
                 cancel={cancel}
                 submit={submit}
-                submitButtonText="Add Exercise"
+                submitButtonText="Edit Exercise"
                 elements={() => (
                     <React.Fragment>
-                            <NewExerciseHeader><i className="fas fa-plus-circle"></i> Add Exercise</NewExerciseHeader>
+                            <NewExerciseHeader><i className="far fa-edit"></i> Edit Exercise</NewExerciseHeader>
                             {errors.map((error, i) => <ErrorMessage key={i}>{error}</ErrorMessage>)}
                             <FormRow>
                                 <FormLabel htmlFor="title">Exercise Name</FormLabel>
@@ -62,7 +69,7 @@ const NewExercise = (props) => {
                                     name="title"
                                     type="text"
                                     onChange={(e)=> change(e, setTitle)} 
-                                    placeholder={title}
+                                    placeholder={exercise.title}
                                     maxLength="16"
                                     required
                                     />
@@ -81,6 +88,7 @@ const NewExerciseContainer = styled.div`
     background-color: #5e5e5e;
     border-radius: 4px;
     padding: .1px 10px 10px 10px;
+    text-align: center;
 `;
 
 const NewExerciseHeader = styled.h3`
@@ -111,8 +119,7 @@ const Input = styled.input`
 const ErrorMessage = styled.p`
     color: red;
     font-size: 13px;
-    margin-top: -7.5px;
     margin-bottom: -7.5px;
 `;
 
-export default NewExercise
+export default ExerciseEdit;

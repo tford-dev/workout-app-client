@@ -12,6 +12,7 @@ import Home from './Components/Home';
 import WorkoutPage from './Components/WorkoutPage';
 import Workout from './Components/Workout';
 import ExercisePage from './Components/ExercisePage';
+import ExerciseEdit from './Components/ExerciseEdit';
 import Exercise from './Components/Exercise';
 import Help from './Components/Help';
 import NavBar from './Components/NavBar';
@@ -34,6 +35,7 @@ function App() {
                         <Route path="/sign-in" component={Signin} />
                         <Route path="/sign-up" component={Signup} />
                         <Route path="/new-workout" component={NewWorkout} />
+                        <Route path="/workouts/:workoutId/exercises/:id/edit" component={ExerciseEdit} />
                         <Route path="/workouts/:workoutId/exercises/:id" component={ExercisePage} />
                         <Route path="/workouts/:id/edit" component={WorkoutEdit} />
                         <Route path="/workouts/:id" component={WorkoutPage} />
