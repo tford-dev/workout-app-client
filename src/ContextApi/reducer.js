@@ -30,7 +30,7 @@ export const api = (path, method='GET', body=null, requiresAuth=false, credentia
 }
 
 const signIn = async (emailAddress, password) => {
-    const user = await initialState.UserRequests.getUser(emailAddress, password);
+    const user = await UserRequests.getUser(emailAddress, password);
     if(user !== null){
         user.password = password;
         initialState.authenticatedUser = user;
