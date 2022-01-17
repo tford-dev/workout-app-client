@@ -27,17 +27,18 @@ function App() {
             <AppContainer>
                     <NavBar />
                     <Switch>
-                        <Route path="/home" component={Home} />
-                        <Route path="/sign-in" component={Signin} />
-                        <Route path="/sign-up" component={Signup} />
-                        <Route path="/new-workout" component={NewWorkout} />
+                        <Route exact path="/home" component={Home} />
+                        <Redirect exact from="/" to="/home" />
+                        <Route exact path="/sign-in" component={Signin} />
+                        <Route exact path="/sign-up" component={Signup} />
+                        <Route exact path="/new-workout" component={NewWorkout} />
                         <Route path="/workouts/:workoutId/exercises/:id/edit" component={ExerciseEdit} />
                         <Route path="/workouts/:workoutId/exercises/:id" component={ExercisePage} />
                         <Route path="/workouts/:id/edit" component={WorkoutEdit} />
                         <Route path="/workouts/:id" component={WorkoutPage} />
-                        <Route path="/help" component={Help} />
-                        <Route path="/sign-out" component={SignOut} />
-                        <Route path="/error" component={AppError} />
+                        <Route exact path="/help" component={Help} />
+                        <Route exact path="/sign-out" component={SignOut} />
+                        <Route exact path="/error" component={AppError} />
                         <Redirect from="*" to="/error" />
                     </Switch>
             </AppContainer>
