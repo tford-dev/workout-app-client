@@ -3,7 +3,6 @@ import { useStateValue } from '../ContextApi/StateProvider';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import Cookies from "js-cookie";
 import Form from './Form';
 import './components.css';
 

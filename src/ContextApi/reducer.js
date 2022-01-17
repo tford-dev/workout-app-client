@@ -1,4 +1,3 @@
-import React from 'react';
 import Cookies from "js-cookie";
 import { ExerciseRequests } from './ExerciseRequests';
 import { WorkoutRequests } from './WorkoutRequests';
