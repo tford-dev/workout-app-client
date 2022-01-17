@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Workout from './Workout';
 import NewWorkoutButton from './NewWorkoutButton';
 import { useStateValue } from '../ContextApi/StateProvider';
+import { Redirect } from 'react-router-dom';
 
 const Home = () => {
     const [initialState, dispatch] = useStateValue();
@@ -28,10 +29,14 @@ const Home = () => {
         })
     }, [])
     return ( 
-        <HomeContainer>
-            <NewWorkoutButton tabIndex={1}/>
-            {indexArr}
-        </HomeContainer>
+        authUser ? (
+            <HomeContainer>
+                <NewWorkoutButton tabIndex={1}/>
+                {indexArr}
+            </HomeContainer>
+        ) : (
+            <Redirect to="/sign-in" />
+        )
     )
 }
 

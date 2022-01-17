@@ -3,7 +3,7 @@
     text-decoration: none;
 }
 
-.link:visited {
+.link:any-link {
     color: white;
 }
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Exercise from './Exercise';
 import NewExercise from './NewExercise'
 import { useStateValue } from '../ContextApi/StateProvider';
@@ -79,45 +79,49 @@ const WorkoutPage = (props) => {
     }
 
     return (
-        <WorkoutContainer>
-            <WorkoutContentContainer>
-                <h1>{workout.title}</h1>
-                <p style={{marginTop: '-15px'}}>{workout.description}</p>
-                <p style={{marginTop: '-5px'}}>{workout.time}</p>
-                {
-                    initialState.exerciseFormOpen ? (
-                        <NewExercise workoutId={props.match.params.id} updateFunction={updateExercises} />
-                    ) : (
-                        null
-                    )
-                }
-                
-                <WorkoutExerciseContainer>
-                    <WorkoutButtonContainer>
-                        {
-                            initialState.exerciseFormOpen ? (
-                                <WorkoutNewButton tabIndex={1} onClick={closeForm} style={{backgroundColor: '#ffb300'}}>
-                                    <p><i className="fas fa-times-circle"></i> Cancel</p>
-                                </WorkoutNewButton>
-                            ) : (
-                                <WorkoutNewButton tabIndex={1} onClick={openForm}>
-                                    <p><i className="fas fa-plus-circle"></i> Add Exercise</p>
-                                </WorkoutNewButton>
-                            )
-                        }
-                        <WorkoutEditButton tabIndex={1}>
-                            <Link to={`/workouts/${props.match.params.id}/edit`} className='link'>
-                                <p ><i className="fas fa-edit"></i> Edit Workout</p>
-                            </Link>
-                        </WorkoutEditButton>
-                        <WorkoutDeleteButton tabIndex={1} onClick={deleteWorkout}>
-                            <p><i className="fas fa-trash-alt"></i> Delete</p>
-                        </WorkoutDeleteButton>
-                    </WorkoutButtonContainer>
-                    {indexArr}
-                </WorkoutExerciseContainer>
-            </WorkoutContentContainer>
-        </WorkoutContainer>
+        authUser ? (
+            <WorkoutContainer>
+                <WorkoutContentContainer>
+                    <h1>{workout.title}</h1>
+                    <p style={{marginTop: '-15px'}}>{workout.description}</p>
+                    <p style={{marginTop: '-5px'}}>{workout.time}</p>
+                    {
+                        initialState.exerciseFormOpen ? (
+                            <NewExercise workoutId={props.match.params.id} updateFunction={updateExercises} />
+                        ) : (
+                            null
+                        )
+                    }
+                    
+                    <WorkoutExerciseContainer>
+                        <WorkoutButtonContainer>
+                            {
+                                initialState.exerciseFormOpen ? (
+                                    <WorkoutNewButton tabIndex={1} onClick={closeForm} style={{backgroundColor: '#ffb300'}}>
+                                        <p><i className="fas fa-times-circle"></i> Cancel</p>
+                                    </WorkoutNewButton>
+                                ) : (
+                                    <WorkoutNewButton tabIndex={1} onClick={openForm}>
+                                        <p><i className="fas fa-plus-circle"></i> Add Exercise</p>
+                                    </WorkoutNewButton>
+                                )
+                            }
+                            <WorkoutEditButton tabIndex={1}>
+                                <Link to={`/workouts/${props.match.params.id}/edit`} className='link'>
+                                    <p ><i className="fas fa-edit"></i> Edit Workout</p>
+                                </Link>
+                            </WorkoutEditButton>
+                            <WorkoutDeleteButton tabIndex={1} onClick={deleteWorkout}>
+                                <p><i className="fas fa-trash-alt"></i> Delete</p>
+                            </WorkoutDeleteButton>
+                        </WorkoutButtonContainer>
+                        {indexArr}
+                    </WorkoutExerciseContainer>
+                </WorkoutContentContainer>
+            </WorkoutContainer>
+        ) : (
+            <Redirect to="/sign-in" />
+        )
     )
 }
 

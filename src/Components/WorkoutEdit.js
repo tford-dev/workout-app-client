@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { useStateValue } from '../ContextApi/StateProvider';
-import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import Cookies from "js-cookie";
@@ -62,43 +61,47 @@ const WorkoutEdit = (props) => {
     }
 
     return (
-        <WorkoutEditContainer>
-            <FormContainer>
-                    <Form 
-                        cancel={cancel}
-                        submit={submit}
-                        submitButtonText="Update Workout"
-                        elements={() => (
-                            <React.Fragment>
-                                    <h2 className="form-header"><i className="fas fa-newspaper"></i> Edit Workout</h2>
-                                    {errors.map((error, i) => <ErrorMessage key={i}>{error}</ErrorMessage>)}
-                                    <FormRow>
-                                        <FormLabel htmlFor="title">Title</FormLabel>
-                                        <Input
-                                            id="title"
-                                            name="title"
-                                            type="text"
-                                            onChange={(e)=> change(e, setTitle)} 
-                                            value={title}
-                                            maxLength="16"
-                                            required
-                                            />
-                                    </FormRow>
-                                    <FormRow>
-                                        <FormLabel htmlFor="description">Description</FormLabel>
-                                        <Input
-                                            id="description" 
-                                            name="description" 
-                                            type="text" 
-                                            onChange={(e) => change(e, setDescription)} 
-                                            value={description}
-                                            required
-                                            />
-                                    </FormRow>
-                            </React.Fragment>
-                    )} />
-                </FormContainer>  
-        </WorkoutEditContainer>
+        authUser ? (
+            <WorkoutEditContainer>
+                <FormContainer>
+                        <Form 
+                            cancel={cancel}
+                            submit={submit}
+                            submitButtonText="Update Workout"
+                            elements={() => (
+                                <React.Fragment>
+                                        <h2 className="form-header"><i className="fas fa-newspaper"></i> Edit Workout</h2>
+                                        {errors.map((error, i) => <ErrorMessage key={i}>{error}</ErrorMessage>)}
+                                        <FormRow>
+                                            <FormLabel htmlFor="title">Title</FormLabel>
+                                            <Input
+                                                id="title"
+                                                name="title"
+                                                type="text"
+                                                onChange={(e)=> change(e, setTitle)} 
+                                                value={title}
+                                                maxLength="16"
+                                                required
+                                                />
+                                        </FormRow>
+                                        <FormRow>
+                                            <FormLabel htmlFor="description">Description</FormLabel>
+                                            <Input
+                                                id="description" 
+                                                name="description" 
+                                                type="text" 
+                                                onChange={(e) => change(e, setDescription)} 
+                                                value={description}
+                                                required
+                                                />
+                                        </FormRow>
+                                </React.Fragment>
+                        )} />
+                    </FormContainer>  
+            </WorkoutEditContainer>
+        ) : (
+            <Redirect to="/sign-in" />
+        )
     )
 }
 

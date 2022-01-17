@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Form from './Form';
+import { Redirect } from 'react-router-dom';
 import { useStateValue } from '../ContextApi/StateProvider';
 
 const ExerciseEdit = (props) => {
@@ -53,30 +54,34 @@ const ExerciseEdit = (props) => {
     }
 
     return (
-        <NewExerciseContainer>
-            <Form 
-                cancel={cancel}
-                submit={submit}
-                submitButtonText="Edit Exercise"
-                elements={() => (
-                    <React.Fragment>
-                            <NewExerciseHeader><i className="far fa-edit"></i> Edit Exercise</NewExerciseHeader>
-                            {errors.map((error, i) => <ErrorMessage key={i}>{error}</ErrorMessage>)}
-                            <FormRow>
-                                <FormLabel htmlFor="title">Exercise Name</FormLabel>
-                                <Input
-                                    id="title"
-                                    name="title"
-                                    type="text"
-                                    onChange={(e)=> change(e, setTitle)} 
-                                    placeholder={exercise.title}
-                                    maxLength="16"
-                                    required
-                                    />
-                            </FormRow>
-                    </React.Fragment>
-            )} />
-        </NewExerciseContainer>
+        authUser ? (
+            <NewExerciseContainer>
+                <Form 
+                    cancel={cancel}
+                    submit={submit}
+                    submitButtonText="Edit Exercise"
+                    elements={() => (
+                        <React.Fragment>
+                                <NewExerciseHeader><i className="far fa-edit"></i> Edit Exercise</NewExerciseHeader>
+                                {errors.map((error, i) => <ErrorMessage key={i}>{error}</ErrorMessage>)}
+                                <FormRow>
+                                    <FormLabel htmlFor="title">Exercise Name</FormLabel>
+                                    <Input
+                                        id="title"
+                                        name="title"
+                                        type="text"
+                                        onChange={(e)=> change(e, setTitle)} 
+                                        placeholder={exercise.title}
+                                        maxLength="16"
+                                        required
+                                        />
+                                </FormRow>
+                        </React.Fragment>
+                )} />
+            </NewExerciseContainer>
+        ) : (
+            <Redirect to="/sign-in" />
+        )
     )
 }
 

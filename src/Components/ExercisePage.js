@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import Form from './Form';
-import Exercise from './Exercise';
-import NewExercise from './NewExercise'
 import SetRow from './SetRow';
+import { Redirect } from 'react-router-dom';
 import { useStateValue } from '../ContextApi/StateProvider';
 
 const ExercisePage = (props) => {
@@ -126,44 +124,47 @@ const ExercisePage = (props) => {
                 />
     })
 
-    console.log(props.match)
     return (
-        <ExercisePageContainer>
-            <ExerciseContentContainer>
-                <ExerciseHeader>Exercise: {exercise.title}</ExerciseHeader>
-                <ExerciseButtonContainer>
-                    <EditButton onClick={toEditPage}>
-                        <p>Edit Exercise</p>
-                    </EditButton>
-                    <DeleteButton onClick={deleteThisExercise}>
-                        <p>Delete Exercise</p>
-                    </DeleteButton>
-                </ExerciseButtonContainer>
-                <ExerciseForm>
-                    <Form
-                        cancel={cancel}
-                        submit={submit}
-                        submitButtonText="Log Set"
-                        elements={() => (
-                        <React.Fragment>
-                            {errors.map((error, i) => <ErrorMessage key={i}>{error}</ErrorMessage>)}
-                            <FormRow>
-                                <FormLabel htmlFor="repNumber">Enter Reps:</FormLabel>
-                                <Input
-                                    id="repNumber"
-                                    name="repNumber"
-                                    type="number"
-                                    onChange={(e)=> change(e, setRepetitions)}
-                                    required 
-                                />
-                            </FormRow>
-                        </React.Fragment>
-                        )}
-                    />
-                </ExerciseForm>
-                {indexArr}
-            </ExerciseContentContainer>
-        </ExercisePageContainer>
+        authUser ? (
+            <ExercisePageContainer>
+                <ExerciseContentContainer>
+                    <ExerciseHeader>Exercise: {exercise.title}</ExerciseHeader>
+                    <ExerciseButtonContainer>
+                        <EditButton onClick={toEditPage}>
+                            <p>Edit Exercise</p>
+                        </EditButton>
+                        <DeleteButton onClick={deleteThisExercise}>
+                            <p>Delete Exercise</p>
+                        </DeleteButton>
+                    </ExerciseButtonContainer>
+                    <ExerciseForm>
+                        <Form
+                            cancel={cancel}
+                            submit={submit}
+                            submitButtonText="Log Set"
+                            elements={() => (
+                            <React.Fragment>
+                                {errors.map((error, i) => <ErrorMessage key={i}>{error}</ErrorMessage>)}
+                                <FormRow>
+                                    <FormLabel htmlFor="repNumber">Enter Repetitions:</FormLabel>
+                                    <Input
+                                        id="repNumber"
+                                        name="repNumber"
+                                        type="number"
+                                        onChange={(e)=> change(e, setRepetitions)}
+                                        required 
+                                    />
+                                </FormRow>
+                            </React.Fragment>
+                            )}
+                        />
+                    </ExerciseForm>
+                    {indexArr}
+                </ExerciseContentContainer>
+            </ExercisePageContainer>
+        ) : (
+            <Redirect to="/sign-in" />
+        )
     )
 }
 
