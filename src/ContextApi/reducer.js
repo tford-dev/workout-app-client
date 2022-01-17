@@ -4,7 +4,6 @@ import { ExerciseRequests } from './ExerciseRequests';
 import { WorkoutRequests } from './WorkoutRequests';
 import { SetsRequests } from './SetsRequests';
 import { UserRequests } from './UserRequests';
-//Cookies.getJSON("authenticatedUser") ||
 
 export const api = (path, method='GET', body=null, requiresAuth=false, credentials=null) => {
     const api = 'https://workout-api-tforddev.herokuapp.com/api';
@@ -48,9 +47,6 @@ const signOut = () => {
 export const initialState = {
     menuOpen: false,
     authenticatedUser: Cookies.get("authenticatedUser") || null,
-    workouts: null,
-    exercises: null,
-    sets: null,
     exerciseFormOpen: false,
     ExerciseRequests: ExerciseRequests,
     WorkoutRequests: WorkoutRequests,
@@ -77,11 +73,6 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 exerciseFormOpen: action.exerciseFormOpen
-            }
-        case 'SET_WORKOUTS': 
-            return {
-                ...state,
-                workouts: action.workouts
             }
         default:
             return state;

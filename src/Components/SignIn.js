@@ -14,21 +14,6 @@ const SignIn = (props) => {
     const [initialState, dispatch] = useStateValue();
     const authUser = initialState.authenticatedUser;
 
-    // const signIn = async (emailAddress, password) => {
-    //     const user = await initialState.UserRequests.getUser(emailAddress, password);
-    //     if(user !== null){
-    //         user.password = password;
-
-    //         dispatch({
-    //             type: "SET_USER",
-    //             authenticatedUser: user
-    //         })
-    //         //Sets authenticated user in cookies for 7 days
-    //         Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 7});
-    //     }
-    //     return user;
-    // } 
-
     //simple method to modify state value based on what is typed in input/textarea elements
     const change = (event, setState) => {
         const value = event.target.value;
@@ -37,31 +22,27 @@ const SignIn = (props) => {
 
     //Submit method takes required keys from state and sends the values to api 
     const submit = () => {
-        // {from} returns user to privateRoute that user tried to access after being authenticated or previous page before requesting to sign in
-        //const {from} = props.location.state || {from: {pathname: props.history.goBack()}};
-            initialState.signIn(emailAddress, password)
-                .then((user) => {
-                    //If user does not exist, errors is pushed an error message that will be rendered to user
-                    if(user === null){
-                        setErrors([...errors, "Sign-In was unsuccessful."])
-                    //If sign in is successful, user is redirected to previous page or private route
-                    } else {
-                        window.location.reload();
-                        //props.history.push(from);
-                        if(window.location.pathname === "/error"){
-                            props.history.push("/home");
-                        }
-                        dispatch({
-                            type: "SET_USER",
-                            authenticatedUser: user,
-                        })
-                        console.log(`${emailAddress} is now signed in!`);
+        initialState.signIn(emailAddress, password)
+            .then((user) => {
+                //If user does not exist, errors is pushed an error message that will be rendered to user
+                if(user === null){
+                    setErrors([...errors, "Sign-In was unsuccessful."])
+                } else {
+                    if(window.location.pathname === "/error"){
+                        props.history.push("/home");
                     }
-                })
-                .catch( err => {
-                    console.log(err.message);
-                    setErrors([...errors, err.message]);
-                })
+                    dispatch({
+                        type: "SET_USER",
+                        authenticatedUser: user,
+                    })
+                    console.log(`${emailAddress} is now signed in!`);
+                    window.location.reload();
+                }
+            })
+            .catch( err => {
+                console.log(err.message);
+                setErrors([...errors, err.message]);
+            })
     }
 
     const cancel = () => {
