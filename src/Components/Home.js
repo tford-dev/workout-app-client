@@ -8,8 +8,8 @@ import { Redirect } from 'react-router-dom';
 
 const Home = () => {
     const [initialState, dispatch] = useStateValue();
-    const authUser = JSON.parse(initialState.authenticatedUser);
     const [workouts, setWorkouts] = useState([]);
+    const authUser = JSON.parse(initialState.authenticatedUser);
     const indexArr = workouts.map(workout => {
         return <Workout
                     key={workout.id}

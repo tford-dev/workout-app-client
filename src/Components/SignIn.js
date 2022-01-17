@@ -21,8 +21,8 @@ const SignIn = (props) => {
     }
 
     //Submit method takes required keys from state and sends the values to api 
-    const submit = () => {
-        initialState.signIn(emailAddress, password)
+    const submit = async() => {
+        await initialState.signIn(emailAddress, password)
             .then((user) => {
                 //If user does not exist, errors is pushed an error message that will be rendered to user
                 if(user === null){
@@ -36,7 +36,6 @@ const SignIn = (props) => {
                         authenticatedUser: user,
                     })
                     console.log(`${emailAddress} is now signed in!`);
-                    window.location.reload();
                 }
             })
             .catch( err => {

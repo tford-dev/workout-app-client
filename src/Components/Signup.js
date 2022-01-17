@@ -23,11 +23,11 @@ const SignUp = (props) => {
     }
 
     //Submit method takes required keys from state and sends the values to api 
-    const submit = () => {
+    const submit = async() => {
         const user = {firstName, lastName, emailAddress, password};
 
         //createUser method takes credentials from context api and course variable to execute request 
-        initialState.UserRequests.createUser(user)
+        await initialState.UserRequests.createUser(user)
             .then(err => {
                 if(err.length){
                     console.log(err)
