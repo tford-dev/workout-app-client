@@ -3,6 +3,7 @@ import React from 'react'
 import {
     BrowserRouter as Router,
     Route,
+    Redirect,
     Switch,
 } from 'react-router-dom';
 import Signin from './Components/SignIn';
@@ -37,6 +38,7 @@ function App() {
                         <Route path="/help" component={Help} />
                         <Route path="/sign-out" component={SignOut} />
                         <Route path="/error" component={AppError} />
+                        <Redirect from="*" to="/error" />
                     </Switch>
             </AppContainer>
         </Router>
@@ -54,7 +56,7 @@ const AppContainer = styled.div`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #000;
-    min-height: 100vh;
+    min-height: 99.9vh;
     padding-bottom: 1px;
 `
 

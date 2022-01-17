@@ -35,6 +35,7 @@ const signIn = async (emailAddress, password) => {
         initialState.authenticatedUser = user;
     //Sets authenticated user in cookies for 7 daYS
     Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 7});
+    window.location.reload();
     }
     return user;
 } 
@@ -57,7 +58,6 @@ export const initialState = {
 }
 
 export const reducer = (state, action) => {
-    console.log(action);
     switch(action.type){
         case 'SET_USER': 
             return {
@@ -74,6 +74,7 @@ export const reducer = (state, action) => {
                 ...state,
                 exerciseFormOpen: action.exerciseFormOpen
             }
+
         default:
             return state;
     }

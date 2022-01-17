@@ -23,10 +23,10 @@ const Menu = () => {
                 <MenuItem>
                     <MenuText>
                         <i className="far fa-user"></i>
-                        <p>{authUser.emailAddress}</p>
+                        <p style={{fontSize: 13}}>{authUser.emailAddress}</p>
                     </MenuText>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem tabIndex={1}>
                     <Link className="menu__link" to="/home">
                         <MenuText>
                             <i className="fas fa-home"></i>
@@ -34,7 +34,7 @@ const Menu = () => {
                         </MenuText>
                     </Link>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem tabIndex={2}>
                     <Link className="menu__link" to="/help">
                         <MenuText>
                             <i className="far fa-question-circle menu-question"></i>
@@ -42,7 +42,7 @@ const Menu = () => {
                         </MenuText>
                     </Link>
                 </MenuItem>
-                <MenuItem onClick={signOutFunc}>
+                <MenuItem onClick={signOutFunc} tabIndex={3}>
                     <Link className="menu__link" to="/sign-out">
                         <MenuText>
                             <i className="fas fa-sign-out-alt"></i>

@@ -80,7 +80,7 @@ const WorkoutEdit = (props) => {
                                                 type="text"
                                                 onChange={(e)=> change(e, setTitle)} 
                                                 value={title}
-                                                maxLength="16"
+                                                maxLength="18"
                                                 required
                                                 />
                                         </FormRow>
@@ -111,6 +111,7 @@ const WorkoutEditContainer = styled.div`
     width: 90%;
     color: #fff;
     margin: auto;
+    margin-top: 15px;
     flex-direction: column;
     background-color: #424242;
     text-align: center;

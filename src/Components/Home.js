@@ -28,6 +28,7 @@ const Home = () => {
             console.log('Error' + err);
         })
     }, [])
+    
     return ( 
         authUser ? (
             <HomeContainer>
@@ -44,6 +45,7 @@ const HomeContainer = styled.div`
     color: white;
     max-width: 90%;
     margin: auto;
+    margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

@@ -55,8 +55,6 @@ const ExercisePage = (props) => {
     const deleteThisExercise = () => {
         let workoutId = props.match.params.workoutId;
         let id = props.match.params.id;
-        console.log(workoutId)
-        console.log(id)
         if(window.confirm("Are sure you want to delete this exercise? Once deleted, it can not be retrieved.")){
             initialState.ExerciseRequests.deleteExercise(workoutId, id, authUser.emailAddress, authUser.password)
                 .then((response) =>{
@@ -82,7 +80,6 @@ const ExercisePage = (props) => {
     const change = (event, setState) => {
         const value = event.target.value;
         setState(value);
-        console.log(repetitions);
     }
 
     const cancel = () => {
@@ -172,6 +169,7 @@ const ExercisePageContainer = styled.div`
     width: 90%;
     background-color: #424242;
     margin: auto;
+    margin-top: 15px;
     color: #fff;
     padding-top: 1px;
     border-radius: 8px;

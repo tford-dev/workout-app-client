@@ -8,7 +8,6 @@ import { useStateValue } from '../ContextApi/StateProvider';
 const NavBar = () => {
     const [initialState, dispatch] = useStateValue();
     const authUser = initialState.authenticatedUser;
-    console.log(initialState);
     const setMenuOpen = () =>{
         if(initialState.menuOpen){
             dispatch({
@@ -28,16 +27,16 @@ const NavBar = () => {
                 {
                     authUser ? (
                         initialState.menuOpen ? (
-                            <i className="fas fa-times" onClick={setMenuOpen} tabIndex={1}></i>
+                            <i className="fas fa-times" onClick={setMenuOpen}  tabIndex={0}></i>
                         ) : (
-                            <i className="fas fa-bars" onClick={setMenuOpen} tabIndex={1}></i>
+                            <i className="fas fa-bars" onClick={setMenuOpen} onKeyDown={setMenuOpen} tabIndex={0}></i>
                         )
                     ) : (
                         <i className="fas fa-bars" onClick={setMenuOpen} style={{visibility: 'hidden'}}></i>
                     )
                 }
-                <Link to="/home" className='link'>
-                    <NavLogoHeader tabIndex={1}>
+                <Link to="/home" className='link' tabIndex={4}>
+                    <NavLogoHeader >
                         <NavLogo version="1.0" xmlns="http://www.w3.org/2000/svg" width="139.000000pt" height="140.000000pt"
                             viewBox="0 0 139.000000 140.000000" preserveAspectRatio="xMidYMid meet">
                         
@@ -61,8 +60,8 @@ const NavBar = () => {
                     </NavLogoHeader>
                 </Link>
                 <i>
-                    <Link to='/help' className='link'>
-                        <i className="far fa-question-circle nav__help" tabIndex={1}></i>
+                    <Link to='/help' className='link' tabIndex={5}>
+                        <i className="far fa-question-circle nav__help"></i>
                     </Link>
                 </i>
             </NavContainer>

@@ -72,7 +72,7 @@ const ExerciseEdit = (props) => {
                                         type="text"
                                         onChange={(e)=> change(e, setTitle)} 
                                         placeholder={exercise.title}
-                                        maxLength="16"
+                                        maxLength="18"
                                         required
                                         />
                                 </FormRow>
@@ -89,6 +89,7 @@ const NewExerciseContainer = styled.div`
     width: 385px;
     margin: auto;
     margin-bottom: 20px;
+    margin-top: 15px;
     color: #fff;
     background-color: #5e5e5e;
     border-radius: 4px;

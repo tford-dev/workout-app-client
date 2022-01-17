@@ -12,7 +12,6 @@ const NewExercise = (props) => {
     const submit = () => {
         let workoutId = parseInt(props.workoutId);
         const exercise = {title, workoutId};
-        console.log(exercise);
         initialState.ExerciseRequests.createExercise(exercise, authUser.emailAddress, authUser.password)
             .then((response)=> {
                 if (response === "success"){
@@ -63,7 +62,7 @@ const NewExercise = (props) => {
                                     type="text"
                                     onChange={(e)=> change(e, setTitle)} 
                                     placeholder={title}
-                                    maxLength="16"
+                                    maxLength="18"
                                     required
                                     />
                             </FormRow>

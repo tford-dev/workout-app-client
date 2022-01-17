@@ -25,6 +25,7 @@ const HelpContainer = styled.div`
     background-color: #424242;
     margin: auto;
     margin-bottom: 100px;
+    margin-top: 15px;
     border-radius: 4px;
     text-align: center;
 `;

@@ -15,21 +15,6 @@ const SignUp = (props) => {
     const [errors, setErrors] = useState([]);
     const [initialState, dispatch] = useStateValue();
     const authUser = initialState.authenticatedUser;
-    console.log(initialState);
-
-    // const signIn = async (emailAddress, password) => {
-    //     const user = await initialState.UserRequests.getUser(emailAddress, password);
-    //     if(user !== null){
-    //         user.password = password;
-    //         dispatch({
-    //             type: "SET_USER",
-    //             authenticatedUser: user
-    //         })
-    //     //Sets authenticated user in cookies for 7 daYS
-    //     Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 7});
-    //     }
-    //     return user;
-    // } 
 
     //simple method to modify state value based on what is typed in input/textarea elements
     const change = (event, setState) => {
@@ -40,7 +25,6 @@ const SignUp = (props) => {
     //Submit method takes required keys from state and sends the values to api 
     const submit = () => {
         const user = {firstName, lastName, emailAddress, password};
-        console.log(user);
 
         //createUser method takes credentials from context api and course variable to execute request 
         initialState.UserRequests.createUser(user)
@@ -55,7 +39,6 @@ const SignUp = (props) => {
                             props.history.push("/home");
                         })
                     console.log(`${emailAddress} is successfully signed up and authorized!`);
-                    window.location.reload();
                 }
             })
             .catch(err => {
@@ -72,7 +55,6 @@ const SignUp = (props) => {
                 <Redirect to="/home" />
             )
     } else {
-        console.log(initialState);
         return (
             <SignInContainer>
                 <FormContainer>

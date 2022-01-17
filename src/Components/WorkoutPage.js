@@ -129,6 +129,7 @@ const WorkoutContainer = styled.div`
     width: 90%;
     background-color: #424242;
     margin: auto;
+    margin-top: 15px;
     padding-top: 1px;
     border-radius: 8px;
     color: #fff;
