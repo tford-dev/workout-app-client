@@ -36,7 +36,8 @@ const SignUp = (props) => {
                 } else {
                     initialState.signIn(emailAddress, password)
                         .then(() => {
-                            props.history.push("/home");
+                            //props.history.push("/home");
+                            <Redirect to="/home" />
                         })
                     console.log(`${emailAddress} is successfully signed up and authorized!`);
                 }
