@@ -35,7 +35,8 @@ const signIn = async (emailAddress, password) => {
     //Sets authenticated user in cookies for 7 daYS
     Cookies.set("authenticatedUser", JSON.stringify(user), {expires: 7});
     }
-    return user, window.location.reload();
+    //return user --old code
+    return window.location.reload();
 } 
 
 const signOut = () => {
