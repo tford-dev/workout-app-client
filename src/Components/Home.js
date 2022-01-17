@@ -17,8 +17,8 @@ const Home = () => {
                     time={workout.time}
                 />
     })
-    useEffect(() => {
-        initialState.WorkoutRequests.getWorkouts(authUser.emailAddress, authUser.password).then(
+    useEffect(async() => {
+        await initialState.WorkoutRequests.getWorkouts(authUser.emailAddress, authUser.password).then(
             response => setWorkouts(response),
             dispatch({
                 type:"SET_WORKOUTS",

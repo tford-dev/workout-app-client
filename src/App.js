@@ -18,17 +18,15 @@ import SignOut from './Components/SignOut';
 import NewWorkout from './Components/NewWorkout';
 import styled from 'styled-components';
 import WorkoutEdit from './Components/WorkoutEdit';
-import { useStateValue } from './ContextApi/StateProvider';
 // <Route path="/" component={} />
 
 function App() {
-    const [initialState, dispatch] = useStateValue();
 	return (
         <Router>
             <AppContainer>
                     <NavBar />
                     <Switch>
-                        <PrivateRoute path="/home" component={Home} />
+                        <Route path="/home" component={Home} />
                         <Route path="/sign-in" component={Signin} />
                         <Route path="/sign-up" component={Signup} />
                         <Route path="/new-workout" component={NewWorkout} />
