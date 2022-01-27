@@ -74,7 +74,7 @@ const NewExercise = (props) => {
 }
 
 const NewExerciseContainer = styled.div`
-    width: 385px;
+    width: 95%;
     margin: auto;
     margin-bottom: 20px;
     color: #fff;
@@ -100,7 +100,7 @@ const FormLabel = styled.label`
 `;
 
 const Input = styled.input`
-    width: 65%;
+    width: 80%;
     background: #5e5e5e;
     border: none;
     border-bottom: 1px solid #fff;
