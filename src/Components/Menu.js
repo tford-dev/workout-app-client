@@ -62,7 +62,6 @@ const MenuContainer = styled.div`
     position: relative;
     background-color: rgba(50, 50, 50, 0.8);
     overflow: hidden;
-}
 `;
 
 const MenuList = styled.div`
