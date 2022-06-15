@@ -41,7 +41,7 @@ const NavBar = () => {
                         <NavLogo version="1.0" xmlns="http://www.w3.org/2000/svg" width="139.000000pt" height="140.000000pt"
                             viewBox="0 0 139.000000 140.000000" preserveAspectRatio="xMidYMid meet">
                         
-                            <g transform="translate(0.000000,140.000000) scale(0.100000,-0.100000)" fill="#ffffff" stroke="none">
+                            <g transform="translate(0.000000,140.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
                                 <path d="M560 1235 c-198 -55 -343 -217 -387 -430 -51 -252 87 -497 334 -592
                                 83 -31 231 -42 314 -23 145 34 281 144 350 284 143 292 7 631 -297 743 -89 32
                                 -233 40 -314 18z m255 -69 c28 -7 66 -21 85 -31 48 -24 140 -93 140 -105 0 -6
@@ -61,7 +61,7 @@ const NavBar = () => {
                     </NavLogoHeader>
                 </Link>
                 <i>
-                    <Link to='/help' className='link' tabIndex={5}>
+                    <Link to='/help' className='link' tabIndex={5} style={{color: '#000'}}>
                         <i className="far fa-question-circle nav__help"></i>
                     </Link>
                 </i>
@@ -80,8 +80,8 @@ const NavBar = () => {
 const Nav = styled.div`
     height: 56px;
     width: 100%;
-    color: #fff;
-    background-color: #000;
+    color: #000;
+    background-color: #fff;
 `;
 
 const NavContainer = styled.div`
@@ -114,6 +114,7 @@ const NavLogoHeader = styled.div`
 const NavHeader = styled.h1`
     margin: 0;
     font-size: 28px;
+    color: #000000;
 `;
 
 const NavLogo = styled.svg`

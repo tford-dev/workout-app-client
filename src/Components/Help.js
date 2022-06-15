@@ -22,7 +22,7 @@ const Help = () => {
 const HelpContainer = styled.div`
     width: 90%;
     color: #fff;
-    background-color: #424242;
+    background-color: #777;
     margin: auto;
     margin-bottom: 100px;
     margin-top: 15px;
@@ -36,7 +36,7 @@ const HelpHeader = styled.h2`
 `
 
 const HelpStep = styled.p`
-    border-top: 1px solid #787878;
+    border-top: 1px solid #bdbdbd;
     padding-top: 7px;
     padding-bottom: 7px;
 `

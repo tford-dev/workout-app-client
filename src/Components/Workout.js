@@ -7,7 +7,7 @@ const Workout = (props) => {
         <Link to={`/workouts/${props.id}`} className='menu__link' tabIndex={1}>
             <WorkoutContainer>
                 <WorkoutContentContainer>
-                    <WorkoutSection style={{borderBottom: '1px solid #787878', width: '100%'}}>
+                    <WorkoutSection style={{borderBottom: '1px solid #bdbdbd', width: '100%'}}>
                         <i className="fas fa-dumbbell"></i>
                         <h3>{props.title}</h3>
                     </WorkoutSection>
@@ -24,7 +24,7 @@ const Workout = (props) => {
 const WorkoutContainer = styled.div`
     width: 215px;
     border-radius: 8px;
-    background-color: #424242;
+    background-color: #777;
     color: #fff;
     text-decoration: none;
 

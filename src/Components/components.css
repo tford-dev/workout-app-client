@@ -2,6 +2,9 @@
 .link {
     text-decoration: none;
 }
+.link:hover {
+    color: #000;
+}
 
 .link:any-link {
     color: white;
@@ -13,7 +16,7 @@
 }
 
 .sign__link:visited {
-    color: #fff;
+    color: #000;
 }
 
 /*Menu*/

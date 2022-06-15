@@ -36,7 +36,9 @@ export default (props) => {
 }
 
 
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+	text-align: center;
+`;
 
 const FormSubmit = styled.input`
 	border: none;

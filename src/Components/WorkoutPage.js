@@ -128,12 +128,11 @@ const WorkoutPage = (props) => {
 
 const WorkoutContainer = styled.div`
     width: 90%;
-    background-color: #424242;
+    background-color: #777777;
     margin: auto;
     margin-top: 15px;
     padding-top: 1px;
     border-radius: 8px;
-    color: #fff;
     text-align: center;
 `;
 
@@ -141,6 +140,7 @@ const WorkoutContentContainer = styled.div`
     width: 90%;
     text-align: center;
     margin: auto;
+    color: #ffffff;
     padding-top: 1px;
 `;
 
@@ -153,13 +153,13 @@ const WorkoutButtonContainer = styled.div`
 const WorkoutEditButton = styled.div`
     width: 30%;
     background-color: #00d0ff;
-    color: #787878;
+    color: #ffffff;
     border-radius: 4px;
     cursor: pointer;
 
     &:hover {
-        background-color: #787878;
         color: #00d0ff;
+        background-color: #ffffff;
     }
 `;
 
@@ -172,19 +172,19 @@ const WorkoutDeleteButton = styled.div`
 
     &:hover {
         background-color: #ffffff;
-        color: #c20000;
+        color: #c20000
     }
 `;
 
 const WorkoutNewButton = styled.div`
     width: 30%;
     background-color: #00cc07;
-    color: #787878;
+    color: #ffffff;
     border-radius: 4px;
     cursor: pointer;
 
     &:hover {
-        background-color: #787878;
+        background-color: #ffffff;
         color: #00cc07;
     }
 `

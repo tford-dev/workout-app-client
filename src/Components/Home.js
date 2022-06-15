@@ -49,7 +49,7 @@ const HomeContainer = styled.div`
     margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     row-gap: 15px;
 `;
 

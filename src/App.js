@@ -41,7 +41,7 @@ function App() {
                         <Route exact path="/error" component={AppError} />
                         <Redirect from="*" to="/error" />
                     </Switch>
-                    <AppFooter />
+                    {/*<AppFooter />*/}
             </AppContainer>
         </Router>
 	);
@@ -57,18 +57,18 @@ const AppContainer = styled.div`
     font-family: 'Helvetica 65 Medium', sans-serif;                               
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #000;
+    background-color: #fff;
     min-height: 99.9vh;
     padding-bottom: 1px;
 `;
 
-const AppFooter = styled.div`
-    position: fixed;
-    bottom: 0;
-    background: rgb(0,0,0);
-    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 4%, rgba(0,0,0,0) 100%);
-    height: 25%;
-    width: 100%;
-`
+// const AppFooter = styled.div`
+//     position: fixed;
+//     bottom: 0;
+//     background: rgb(0,0,0);
+//     background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 4%, rgba(0,0,0,0) 100%);
+//     height: 25%;
+//     width: 100%;
+// `
 
 export default App;

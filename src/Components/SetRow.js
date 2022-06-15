@@ -151,7 +151,7 @@ const FormLabel = styled.label`
 
 const Input = styled.input`
     width: 65%;
-    background: #424242;
+    background: #777777;
     border: none;
     border-bottom: 1px solid #fff;
     outline: none;

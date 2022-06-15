@@ -106,14 +106,13 @@ const WorkoutEdit = (props) => {
 }
 
 const WorkoutEditContainer = styled.div`
-    background-color: #000;
+    background-color: #777777;
     display: flex;
     width: 90%;
-    color: #fff;
+    color: #ffffff;
     margin: auto;
     margin-top: 15px;
     flex-direction: column;
-    background-color: #424242;
     text-align: center;
     border-radius: 8px;
 `;
@@ -137,7 +136,7 @@ const FormLabel = styled.label`
 
 const Input = styled.input`
     width: 65%;
-    background: #424242;
+    background: #777777;
     border: none;
     border-bottom: 1px solid #fff;
     outline: none;

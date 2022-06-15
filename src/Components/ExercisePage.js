@@ -168,7 +168,7 @@ const ExercisePage = (props) => {
 
 const ExercisePageContainer = styled.div`
     width: 90%;
-    background-color: #424242;
+    background-color: #777777;
     margin: auto;
     margin-top: 15px;
     color: #fff;
@@ -183,6 +183,7 @@ const ExerciseContentContainer = styled.div`
 
 const ExerciseHeader = styled.h2`
     border-bottom: 1px solid #787878;
+    text-align: center;
 `;
 
 const ExerciseButtonContainer = styled.div`
@@ -242,7 +243,7 @@ const FormLabel = styled.label`
 
 const Input = styled.input`
     width: 65%;
-    background: #424242;
+    background: #777777;
     border: none;
     border-bottom: 1px solid #fff;
     outline: none;

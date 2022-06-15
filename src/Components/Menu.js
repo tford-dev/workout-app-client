@@ -20,7 +20,7 @@ const Menu = () => {
                 menuOpen: false
             })
         }}>    
-            <MenuList>
+            <MenuList style={initialState.menuOpen ? {overflow: 'hidden'} : {overflow: 'default'}}>
                 <MenuItem>
                     <MenuText>
                         <i className="far fa-user"></i>
@@ -58,9 +58,10 @@ const Menu = () => {
 
 const MenuContainer = styled.div`
     width: 100%;
-    height: 91.5vh;
+    height: 100vh;
     position: relative;
     background-color: rgba(50, 50, 50, 0.8);
+    overflow: hidden;
 }
 `;
 
@@ -69,7 +70,7 @@ const MenuList = styled.div`
     width: 50%;
     color: #fff;
     background-color: #424242;
-    height: 91.5vh;
+    height: 100vh;
 `
 
 const MenuItem = styled.div`
