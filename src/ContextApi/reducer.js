@@ -5,7 +5,7 @@ import { SetsRequests } from './SetsRequests';
 import { UserRequests } from './UserRequests';
 
 export const api = (path, method='GET', body=null, requiresAuth=false, credentials=null) => {
-    const api = 'https://workout-api-tforddev.herokuapp.com/api';
+    const api = 'https://workout-api-tforddev-97efd0f5a3bf.herokuapp.com/api';
     const url = api + path;
 
     const options = {
